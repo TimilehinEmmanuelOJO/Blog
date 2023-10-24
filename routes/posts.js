@@ -15,7 +15,7 @@ const posts = [
     }
 ]
 
-
+//A get request to get all posts from the DB
 postRouter.get('/', (req, res) => {
     res.json(posts)
 });
@@ -24,9 +24,13 @@ postRouter.get('/', (req, res) => {
 //Get one post with id
 
 postRouter.get('/:id', (req, res) => {
+    //assigns the id of individua; post to the id.
     const id = req.params.id
+    //gets the id of a post and see if it is same with the given id and if same store the 
+    // post in the Post.
     const post = posts.find(post => post.id == id)
 
+    //catch the error, if post is not seen display 404 error and the below message
     if (!post) {
         res.status(404)
         res.end("Post with provided id not found")
