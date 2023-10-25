@@ -39,29 +39,31 @@ postRouter.get('/:id', (req, res) => {
 
     res.json(post)
 })
-
+//method to create post and push into the posts array
 postRouter.post('/', (req, res) => {
     const post = req.body
     posts.push(post)
     res.json(post)
 })
 
-
+//method to update a particular post by using id of the post
 postRouter.put('/:id', (req, res) => {
     const id = req.params.id
     const post = req.body
+    //use findindex to check if the id of our post is found in the post array and assign to index
     const index = posts.findIndex(post => post.id == id)
 
+    //index is btw 0 - anynumber therefore if index is -1 i.e not found in the array, throw error
     if (index == -1){
         res.status(404)
         res.end('Post not found')
         return
     }
     posts[index] = post
-    res.json(book)
+    res.json(post)
 })
 
-
+//delete a post by picking with an id
 postRouter.delete('/:id', (req,res) => { 
     const id = req.params.id
     const index = posts.findIndex(post => post.id = id)
