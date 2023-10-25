@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 
 
 const postRoute = require('./routes/posts')
-
+const userRoute = require('./routes/users')
 
 const PORT = 4000
 const app = express();
@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.json())
 
 app.use('/posts', postRoute)
+app.use('/users', userRoute)
 
 app.get('/', (req, res) => {
     res.end('This is Home Route')
