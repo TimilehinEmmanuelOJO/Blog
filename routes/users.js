@@ -61,7 +61,33 @@ userRouter.post('/', (req, res) => {
 })
 
 //update a user details
-userDetails.put('/:id',(req, res) => {
+userRouter.put('/:id',(req, res) => {
     const id = req.params.id
+
+const user = req.body
+const index = users.findindex(user => users.id == id)
+
+if (index == -1){
+    res.status(404)
+    res.end('Can not update user as user not found')
+    return
+}
+users[index] = user
+res.json(users)
 })
+
+//To delete a user profile
+userRouter.delete('/:id', (req, res) => {
+    const id = req.params.id
+    const index = users.findindex(user => users.id == id)
+    if (index == -1){
+        res.status(404)
+        res.end("Book with id cant be found and is not deleted")
+        return
+    }
+books.splice(index, 1)
+res.json(books)
+
+})
+
 module.exports = userRouter
